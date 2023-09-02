@@ -1,6 +1,8 @@
 package ru.aston.ian_ev.task1.order;
 
 import ru.aston.ian_ev.task1.user.User;
+import ru.aston.ian_ev.task2.BadOrderArgumentsException;
+import ru.aston.ian_ev.task2.ErrorCode;
 
 import java.math.BigDecimal;
 
@@ -9,7 +11,13 @@ public abstract class Order implements Discount, Comparable<Order> {
     protected BigDecimal amount;
     protected User user;
 
-    public Order(BigDecimal unitPrice, BigDecimal amount, User user) {
+    public Order(BigDecimal unitPrice, BigDecimal amount, User user) throws BadOrderArgumentsException {
+        if (unitPrice.compareTo(BigDecimal.ONE) < 0) {
+            throw new BadOrderArgumentsException("Минимально возможная цена - 1", ErrorCode.INVALID_UNIT_PRICE);
+        }
+        if (amount.compareTo(BigDecimal.ONE) < 0) {
+            throw new BadOrderArgumentsException("Минимально возможное количество - 1", ErrorCode.INVALID_AMOUNT);
+        }
         this.unitPrice = unitPrice;
         this.amount = amount;
         this.user = user;
