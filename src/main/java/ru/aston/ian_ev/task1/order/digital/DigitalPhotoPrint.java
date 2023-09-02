@@ -2,12 +2,13 @@ package ru.aston.ian_ev.task1.order.digital;
 
 import ru.aston.ian_ev.task1.order.Order;
 import ru.aston.ian_ev.task1.user.User;
+import ru.aston.ian_ev.task2.BadOrderArgumentsException;
 
 import java.math.BigDecimal;
 
 public class DigitalPhotoPrint extends Order {
     private final double imageQuality;
-    public DigitalPhotoPrint(BigDecimal unitPrice, BigDecimal amount, User user, double imageQuality) {
+    public DigitalPhotoPrint(BigDecimal unitPrice, BigDecimal amount, User user, double imageQuality) throws BadOrderArgumentsException {
         super(unitPrice, amount, user);
         this.imageQuality = imageQuality;
     }
