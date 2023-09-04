@@ -8,6 +8,7 @@ import ru.aston.ian_ev.task1.order.digital.DigitalPhotoPrint;
 import ru.aston.ian_ev.task1.order.film.Bundle;
 import ru.aston.ian_ev.task1.order.film.FilmPhotoPrint;
 import ru.aston.ian_ev.task1.user.User;
+import ru.aston.ian_ev.task2.BadOrderArgumentsException;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -25,7 +26,7 @@ public class DailyOrderListTest {
         userA = new User(20, "Name", "A");
     }
     @Test
-    void testSum() {
+    void testSum() throws BadOrderArgumentsException {
         Order order = new DigitalPhotoPrint(BigDecimal.ONE, BigDecimal.TEN, userA, 1);
         Order secondOrder = new FilmPhotoPrint(BigDecimal.TEN, BigDecimal.ONE, userA, Bundle.PREMIUM);
 
@@ -35,7 +36,7 @@ public class DailyOrderListTest {
     }
 
     @Test
-    void testDiscount() {
+    void testDiscount() throws BadOrderArgumentsException {
         Discount discount = new DigitalPhotoPrint(BigDecimal.ONE, BigDecimal.TEN, userA, 0.8);
         Discount secondDiscount = new FilmPhotoPrint(BigDecimal.TEN, BigDecimal.ONE, userA, Bundle.COMMON);
 
@@ -44,7 +45,7 @@ public class DailyOrderListTest {
     }
 
     @Test
-    void testSumWithDiscount() {
+    void testSumWithDiscount() throws BadOrderArgumentsException {
         Order order = new DigitalPhotoPrint(BigDecimal.ONE, BigDecimal.TEN, userA, 0.8);
         Order secondOrder = new FilmPhotoPrint(BigDecimal.TEN, BigDecimal.ONE, userA, Bundle.COMMON);
 
@@ -54,7 +55,7 @@ public class DailyOrderListTest {
     }
 
     @Test
-    void testAlphabeticalOrder() {
+    void testAlphabeticalOrder() throws BadOrderArgumentsException {
         User userB = new User(20, "NameB", "B");
         List<Order> orders = new ArrayList<>();
         orders.add(new FilmPhotoPrint(BigDecimal.TEN, BigDecimal.ONE, userB, Bundle.PREMIUM));
