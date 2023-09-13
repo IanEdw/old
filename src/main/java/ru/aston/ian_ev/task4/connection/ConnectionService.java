@@ -10,17 +10,17 @@ public class ConnectionService {
     private static Connection connection;
 
     public static Connection getConnection() {
-        if (Objects.isNull(connection)) {
-            ResourceBundle resourceBundle = ResourceBundle.getBundle("application");
-            try {
+        try {
+            if (Objects.isNull(connection) || connection.isClosed()) {
+                ResourceBundle resourceBundle = ResourceBundle.getBundle("application");
                 connection = DriverManager.getConnection(
                         resourceBundle.getString("datasource.url"),
                         resourceBundle.getString("datasource.username"),
                         resourceBundle.getString("datasource.password")
                 );
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
             }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
         return connection;
     }
