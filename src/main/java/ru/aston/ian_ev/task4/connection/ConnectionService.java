@@ -10,9 +10,13 @@ public class ConnectionService {
     private static Connection connection;
 
     public static Connection getConnection() {
+        return getConnection("application");
+    }
+
+    public static Connection getConnection(String bundle) {
         try {
             if (Objects.isNull(connection) || connection.isClosed()) {
-                ResourceBundle resourceBundle = ResourceBundle.getBundle("application");
+                ResourceBundle resourceBundle = ResourceBundle.getBundle(bundle);
                 connection = DriverManager.getConnection(
                         resourceBundle.getString("datasource.url"),
                         resourceBundle.getString("datasource.username"),
