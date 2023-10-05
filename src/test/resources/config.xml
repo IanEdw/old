@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+    http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="player"
+          class="ru.aston.ian_ev.task10.MusicPlayer"
+          destroy-method="destroy"
+    >
+        <constructor-arg value="Walkman"/>
+    </bean>
+
+    <bean id="music"
+          class="ru.aston.ian_ev.task10.RockMusic"
+          scope="prototype"
+          init-method="init"
+    />
+
+</beans>
